@@ -1,6 +1,7 @@
 # Movie Database App
 
-![App Screenshots](image.png)
+![image](https://github.com/Mo5hu/the_movie_database/assets/42168933/41cbc925-409a-41a7-8926-081d84f3cd75)
+
 
 ## Description
 
@@ -11,9 +12,7 @@ The Movie Database App is a Flutter application that allows users to browse and 
 - [Installation](#installation)
 - [Usage](#usage)
 - [Design Choices](#design-choices)
-- [Screenshots](#screenshots)
 - [Contributing](#contributing)
-- [License](#license)
 - [Contact](#contact)
 
 ## Installation
