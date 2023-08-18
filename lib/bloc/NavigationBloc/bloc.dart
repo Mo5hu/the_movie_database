@@ -14,6 +14,7 @@ class NavigationBloc extends Bloc<NavigationEvent, NavigationState> {
     on<NavigationEvent>((event, emit) async {
       if (event is NavigateToHomeEvent) {
         print('debugging: To Home');
+        emit(LoadingState());
         final genreRes = await apiService.fetchMoviesCategories();
         final popularMoviesRes = await apiService.fetchPopularMovies();
         final upcomingMoviesRes = await apiService.fetchUpcomingMovies();

@@ -5,8 +5,10 @@ class SearchMovieScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder(
-      child: Text('Search Movie Screen'),
+    return const Expanded(
+      child: Center(
+        child: Text('Search Movie Screen'),
+      ),
     );
   }
 }
