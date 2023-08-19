@@ -5,8 +5,6 @@ class SavedMovieScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Expanded(
-      child: Center(child: Text('Saved Movie Screen')),
-    );
+    return Center(child: Text('Saved Movie Screen'));
   }
 }

@@ -23,7 +23,9 @@ class MovieCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(
                 10), // Apply the same borderRadius to ClipRRect
             child: Image.network(
-              'https://image.tmdb.org/t/p/w185${movie.posterPath}',
+              movie.posterPath == null
+                  ? 'https://www.flicks.co.za/img/placeholders/poster-placeholder.jpg'
+                  : 'https://image.tmdb.org/t/p/w185${movie.posterPath}',
               fit: BoxFit.fitHeight,
             ),
           ),

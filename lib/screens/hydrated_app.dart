@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:the_movie_database/bloc/NavigationBloc/bloc.dart';
 import 'package:the_movie_database/bloc/NavigationBloc/event.dart';
 import 'package:the_movie_database/bloc/NavigationBloc/state.dart';
-import 'package:the_movie_database/widgets/get_screen.dart';
+import 'package:the_movie_database/widgets/get_main_screens.dart';
 
 class HydratedApp extends StatelessWidget {
   const HydratedApp({super.key});
@@ -14,7 +14,7 @@ class HydratedApp extends StatelessWidget {
     return BlocBuilder<NavigationBloc, NavigationState>(
         builder: (context, state) {
       return Scaffold(
-        backgroundColor: Color(0xFF1B1A21),
+        backgroundColor: const Color(0xFF1B1A21),
         body: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -28,7 +28,7 @@ class HydratedApp extends StatelessWidget {
           child: SafeArea(
               child: Padding(
             padding: const EdgeInsets.fromLTRB(8, 16, 0, 0),
-            child: getScreen(state),
+            child: getMainScreens(state, navigationBloc.apiService),
           )),
         ),
         bottomNavigationBar: BottomNavigationBar(

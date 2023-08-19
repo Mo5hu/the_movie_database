@@ -4,8 +4,8 @@ import 'package:the_movie_database/data/genre.dart';
 import '../data/movie.dart';
 import 'movie_card.dart';
 
-class MovieRow extends StatelessWidget {
-  const MovieRow(
+class SearchMovieResults extends StatelessWidget {
+  const SearchMovieResults(
       {super.key,
       required this.popularMovieResponse,
       required this.sectionHeader,
@@ -41,9 +41,7 @@ class MovieRow extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 8.0),
                 child: MovieCard(
                     movie: movie,
-                    genraName: movie.genreIds.isEmpty
-                        ? "Unknown"
-                        : _findGenreNameById(movie.genreIds.first)),
+                    genraName: _findGenreNameById(movie.genreIds.first)),
               );
             },
           ),

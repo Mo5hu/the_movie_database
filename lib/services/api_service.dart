@@ -66,4 +66,18 @@ class ApiService {
       throw Exception('Failed to load data');
     }
   }
+
+  Future<dynamic> fetchSearchMovieResults(query) async {
+    final response = await http.get(
+      Uri.parse(
+          'https://api.themoviedb.org/3/search/movie?query=$query&include_adult=false&language=en-US&page=1'),
+      headers: {'Authorization': 'Bearer $ACCESSTOKEN'},
+    );
+
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
 }
