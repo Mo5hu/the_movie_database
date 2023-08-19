@@ -1,11 +1,11 @@
-import 'dart:convert';
-
 import 'package:bloc/bloc.dart';
 import 'package:the_movie_database/bloc/NavigationBloc/event.dart';
 import 'package:the_movie_database/bloc/NavigationBloc/state.dart';
 import 'package:the_movie_database/data/genre.dart';
 import 'package:the_movie_database/data/movie.dart';
 import 'package:the_movie_database/services/api_service.dart';
+
+import '../../helper_functions/extractingFromJson.dart';
 
 class NavigationBloc extends Bloc<NavigationEvent, NavigationState> {
   final ApiService apiService;
@@ -19,10 +19,12 @@ class NavigationBloc extends Bloc<NavigationEvent, NavigationState> {
         final popularMoviesRes = await apiService.fetchPopularMovies();
         final upcomingMoviesRes = await apiService.fetchUpcomingMovies();
 
-        final genresResponse = extractingGenre(genreRes);
-        final popularMoviesResponse = extractingPopularMovies(popularMoviesRes);
-        final upcomingMoviesResponse =
-            extractingPopularMovies(upcomingMoviesRes);
+        final genresResponse = extractingFromJson<GenresResponse>(
+            genreRes, GenresResponse.fromJson);
+        final popularMoviesResponse = extractingFromJson<MovieResponse>(
+            popularMoviesRes, MovieResponse.fromJson);
+        final upcomingMoviesResponse = extractingFromJson<MovieResponse>(
+            upcomingMoviesRes, MovieResponse.fromJson);
 
         emit(HomeScreenState(
             genresResponse, popularMoviesResponse, upcomingMoviesResponse));
@@ -30,6 +32,7 @@ class NavigationBloc extends Bloc<NavigationEvent, NavigationState> {
         print('debugging: To Saved');
         emit(SavedScreenState());
       } else if (event is NavigateToSearchEvent) {
+        emit(LoadingState());
         print('debugging: To Search');
         emit(SearchScreenState());
       } else if (event is LoadDataEvent) {
@@ -38,13 +41,5 @@ class NavigationBloc extends Bloc<NavigationEvent, NavigationState> {
       }
     });
     add(NavigateToHomeEvent());
-  }
-
-  GenresResponse extractingGenre(genreRes) {
-    return GenresResponse.fromJson(json.decode(genreRes));
-  }
-
-  MovieResponse extractingPopularMovies(popularMoviesRes) {
-    return MovieResponse.fromJson(json.decode(popularMoviesRes));
   }
 }
