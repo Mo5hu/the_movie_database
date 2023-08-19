@@ -48,12 +48,15 @@ class HydratedApp extends StatelessWidget {
           ],
           currentIndex: _getSelectedIndex(state),
           onTap: (index) {
-            if (index == 0) {
-              navigationBloc.add(NavigateToHomeEvent());
-            } else if (index == 1) {
-              navigationBloc.add(NavigateToSearchEvent());
-            } else if (index == 2) {
-              navigationBloc.add(NavigateToSavedEvent());
+            if (navigationBloc.state is LoadingState) {
+            } else {
+              if (index == 0) {
+                navigationBloc.add(NavigateToHomeEvent());
+              } else if (index == 1) {
+                navigationBloc.add(NavigateToSearchEvent());
+              } else if (index == 2) {
+                navigationBloc.add(NavigateToSavedEvent());
+              }
             }
           },
           backgroundColor: Color(0xFF1B1A21),
