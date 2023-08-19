@@ -3,9 +3,9 @@ import 'package:the_movie_database/data/movie.dart';
 
 class MovieCard extends StatelessWidget {
   final Movie movie;
-  final String genraName;
+  final String genreName;
 
-  const MovieCard({Key? key, required this.movie, required this.genraName})
+  const MovieCard({Key? key, required this.movie, required this.genreName})
       : super(key: key);
 
   @override
@@ -39,7 +39,7 @@ class MovieCard extends StatelessWidget {
         ),
         const SizedBox(height: 2),
         Text(
-          "${movie.voteAverage.toString()} • $genraName",
+          "${movie.voteAverage.toString()} • $genreName",
           overflow: TextOverflow.ellipsis,
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.titleMedium,

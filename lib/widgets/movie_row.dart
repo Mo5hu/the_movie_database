@@ -41,7 +41,7 @@ class MovieRow extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 8.0),
                 child: MovieCard(
                     movie: movie,
-                    genraName: movie.genreIds.isEmpty
+                    genreName: movie.genreIds.isEmpty
                         ? "Unknown"
                         : _findGenreNameById(movie.genreIds.first)),
               );

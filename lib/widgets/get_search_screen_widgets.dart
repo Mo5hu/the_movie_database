@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:the_movie_database/widgets/search_movie_results.dart';
 
 import '../bloc/SearchBlocc/state.dart';
-import 'movie_row.dart';
 
 Widget getSearchScreenWidgets(SearchState state) {
   if (state is InitialState) {
@@ -17,10 +17,10 @@ Widget getSearchScreenWidgets(SearchState state) {
       child: CircularProgressIndicator(),
     );
   } else if (state is LoadedState) {
-    return MovieRow(
-        popularMovieResponse: state.movieResponse,
+    return SearchMovieResults(
         sectionHeader: "Search Results",
-        genreResponse: state.genreResponse);
+        genreResponse: state.genreResponse,
+        searchMovieResponse: state.movieResponse);
   } else {
     return const Center(child: Text('Unknown State'));
   }

@@ -7,16 +7,25 @@ import 'movie_card.dart';
 class SearchMovieResults extends StatelessWidget {
   const SearchMovieResults(
       {super.key,
-      required this.popularMovieResponse,
+      required this.searchMovieResponse,
       required this.sectionHeader,
       required this.genreResponse});
 
-  final MovieResponse popularMovieResponse;
+  final MovieResponse searchMovieResponse;
   final String sectionHeader;
   final GenresResponse genreResponse;
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> movies = [];
+    for (var movie in searchMovieResponse.results) {
+      movies.add(MovieCard(
+          genreName: movie.genreIds.isEmpty
+              ? "Unknown"
+              : _findGenreNameById(movie.genreIds.first),
+          movie: movie));
+    }
+
     return Column(
       children: [
         Row(
@@ -31,21 +40,85 @@ class SearchMovieResults extends StatelessWidget {
           height: 16,
         ),
         SizedBox(
-          height: 220, // Adjust the height as needed
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: popularMovieResponse.results.length,
+          height: 560,
+          child: GridView.builder(
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 150, // Adjust the max width of each item
+              mainAxisSpacing: 8,
+              crossAxisSpacing: 8,
+              childAspectRatio: 0.5, // Adjust the aspect ratio as needed
+            ),
+            itemCount: searchMovieResponse.results.length,
             itemBuilder: (context, index) {
-              final movie = popularMovieResponse.results[index];
-              return Padding(
-                padding: const EdgeInsets.only(right: 8.0),
-                child: MovieCard(
-                    movie: movie,
-                    genraName: _findGenreNameById(movie.genreIds.first)),
-              );
+              final movie = searchMovieResponse.results[index];
+              return MovieCard(
+                  movie: movie,
+                  genreName: movie.genreIds.isEmpty
+                      ? "Unknown"
+                      : _findGenreNameById(movie.genreIds.first));
             },
           ),
         ),
+        // GridView.builder(
+        //   scrollDirection: Axis.vertical,
+        //   gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+        //     maxCrossAxisExtent: 150, // Adjust the max width of each item
+        //     mainAxisSpacing: 8,
+        //     crossAxisSpacing: 8,
+        //     childAspectRatio: 0.7, // Adjust the aspect ratio as needed
+        //   ),
+        //   itemCount: searchMovieResponse.results.length,
+        //   itemBuilder: (context, index) {
+        //     final movie = searchMovieResponse.results[index];
+        //     return MovieCard(
+        //         movie: movie,
+        //         genreName: movie.genreIds.isEmpty
+        //             ? "Unknown"
+        //             : _findGenreNameById(movie.genreIds.first));
+        //   },
+        // ),
+        // Flex(
+        //   direction: Axis.horizontal,
+        //   children: movies,
+        // ),
+        // SizedBox(
+        //   height: 220, // Adjust the height as needed
+        //   child: ListView.builder(
+        //     scrollDirection: Axis.horizontal,
+        //     itemCount: searchMovieResponse.results.length,
+        //     itemBuilder: (context, index) {
+        //       final movie = searchMovieResponse.results[index];
+        //       return Padding(
+        //         padding: const EdgeInsets.only(right: 8.0),
+        //         child: MovieCard(
+        //             movie: movie,
+        //             genreName: movie.genreIds.isEmpty
+        //                 ? "Unknown"
+        //                 : _findGenreNameById(movie.genreIds.first)),
+        //       );
+        //     },
+        //   ),
+        // ),
+        // SizedBox(
+        //   height: 220, // Adjust the height as needed
+        //   child: ListView.builder(
+        //     scrollDirection: Axis.horizontal,
+        //     itemCount: searchMovieResponse.results.length,
+        //     itemBuilder: (context, index) {
+        //       final movie = searchMovieResponse.results[index];
+        //       return Padding(
+        //         padding: const EdgeInsets.only(right: 8.0),
+        //         child: Flexible(
+        //           child: MovieCard(
+        //               movie: movie,
+        //               genreName: movie.genreIds.isEmpty
+        //                   ? "Unknown"
+        //                   : _findGenreNameById(movie.genreIds.first)),
+        //         ),
+        //       );
+        //     },
+        //   ),
+        // )
       ],
     );
   }
