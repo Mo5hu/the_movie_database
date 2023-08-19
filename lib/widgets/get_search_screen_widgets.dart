@@ -6,11 +6,11 @@ import 'movie_row.dart';
 Widget getSearchScreenWidgets(SearchState state) {
   if (state is InitialState) {
     return const Center(
-      child: Text('Initial'),
+      child: Text('Search for Movies'),
     );
   } else if (state is EmptyState) {
     return const Center(
-      child: Text('Empty'),
+      child: Text('No Results'),
     );
   } else if (state is LoadingState) {
     return const Center(
